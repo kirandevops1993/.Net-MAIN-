@@ -12,7 +12,6 @@ jobs:
         task:
           - command: restore
             projects: '**/*.csproj'
-            feedsToUse: config
             nugetConfigPath: 'NuGet.config'
 
           - command: build
@@ -29,13 +28,12 @@ jobs:
 
     uses: kirandevops1993/.NET-REUSBALE/.github/workflows/reusable.yml@main
     with:
-      command: ${{ matrix.task.command }}
-      projects: ${{ matrix.task.projects || '' }}
-      arguments: ${{ matrix.task.arguments || '' }}
-      feedsToUse: ${{ matrix.task.feedsToUse || '' }}
-      nugetConfigPath: ${{ matrix.task.nugetConfigPath || '' }}
-      packagesToPack: ${{ matrix.task.packagesToPack || '' }}
-      configuration: ${{ matrix.task.configuration || '' }}
+      command: restore
+      projects: '**/*.csproj'
+      arguments: '--configuration Release'
+      nugetConfigPath: 'NuGet.config'
+      packagesToPack: '**/*.csproj'
+      configuration: 'Release'
       custom: 'true'
       restoreArguments: '--interactive'
       testRunTitle: 'CI Test Run'
